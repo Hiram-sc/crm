@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão CRM</title>
+
+    <!-- Preload de conexão de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --nav-height: 60px;
+            --color-bg-container: #0f172a;
+            --color-white: #FFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, footer {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body, p, textarea {
+            font-family: 'Inter', sans-serif;
+        }
+
+        img {
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .break {
+            display: block;
+        }
+
+        body {
+            background-color: var(--color-bg-container);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+        }
+
+        .title-block {
+            
+        }
+
+        .nav-title {
+            color: var(--color-white);
+        }
+
+        .nav-item {
+            list-style: none;
+        }
+
+        .nav-btn {
+            color: var(--color-white);
+            padding: 10px 20px;
+            background-color: rgb(136, 93, 200);
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .hero {
+            padding: 120px 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .hero-grid {
+            position:absolute;
+            inset:0;
+            z-index:0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size:40px 40px;
+            mask-image:radial-gradient(circle at center, rgb(15, 250, 58),transparent 80%);
+            animation:gridFlow 18s linear infinite;
+        }
+
+        .header {
+            max-width: 600px;
+        }
+
+        .title-hero {
+            color: var(--color-white);
+            font-size: 40px;
+            line-height: 1.2;
+        }
+
+        .hero-card img {
+            height: auto;
+            width: 500px;
+            border-radius: 30px;
+            filter: 
+                brightness(0.88)
+                saturate(0.82);
+            transition: 0.3s ease;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .hero-card img:hover {
+            box-shadow: 0 8px 14px rgba(84, 76, 95, 0.3);
+        }
+
+        /* Animations */
+
+        @keyframes gridFlow {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, 30px);
+            }
+            100% {
+                transform: translate(60px, 60px);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar" role="navigation">
+            <div class="title-block">
+                <h1 class="nav-title">
+                    CRM Pessoal
+                </h1>
+            </div>
+
+            <div class="nav">
+                <div class="nav-list">
+                    <li class="nav-item"><a class="nav-btn" href="{% url 'login' %}">Entrar</a></li>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+
+            <div class="hero-grid"></div>
+            
+            <div class="hero-container">
+                <div class="header">
+                    <h1 class="title-hero">
+                        Sistema de Gestão para acompanhamento pessoal e empresarial
+                        <span class="break">Seu Negócio.</span>
+                        <span class="break">Sua Ordem.</span>
+                    </h1>
+                </div>
+
+                <div class="hero-card">
+                    <img src="{% static 'img/paineldemetricas.jpg' %}">
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

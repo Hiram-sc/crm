@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Pessoal</title>
+    
+</head>
+<body>
+    <header>
+        <div class="sidebar-container">
+            <!-- Sidebar -->
+            <nav class="col-md-2 sidebar p-0"> 
+                <h5 class="text-white text-center py-4">Gestão CRM</h5>
+                <a href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a> 
+                <a href="{% url 'tarefas' %}"><i class="fa-solid fa-folder me-2"></i> Tarefas</a>
+                <a href="{% url 'contatos' %}"><i class="fa-solid fa-folder me-2"></i> Contatos</a>
+                <a href="{% url 'conversas' %}"><i class="fa-solid fa-folder me-2"></i> Conversas</a>
+                <a href="{% url 'agenda' %}"><i class="fa-solid fa-folder me-2"></i> Agenda</a>
+                <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Boostrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

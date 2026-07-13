@@ -1,0 +1,124 @@
+{% extends "users/base_auth.html" %}
+
+{% block title %} Gestão CRM | Login {% endblock %}
+
+{% block extra_css %}
+
+<style>
+
+    .return {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    .return-link {
+        color: var(--color-white);
+        list-style: none;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+    
+    .return-link:hover {
+        background-color: rgba(232, 232, 232, 0.1);
+    }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="return">
+    <div class="return-content">
+        <a href="{% url 'home' %}" class="return-link">
+            ← Retornar
+        </a>
+    </div>
+</section>
+
+<section class="section-form">
+    <form method="post" class="form-auth" novalidate>
+        
+        <div class="form-top">
+            <div class="form-header">
+                <h3 class="title-form">
+                    Login
+                </h3>
+            </div>
+            
+            <div class="form-description">
+                <p class="description">Acesse sua conta ou cadastre-se para entrar no sistema.</p>
+            </div>
+        </div>
+        
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-body">
+            <div class="form-group">
+                <div class="form-content">
+                    <label class="text-form">
+                        Usuário
+                    </label>
+                    {{ form.username }}
+                </div>
+
+                {% if form.username.errors %}
+                    <div class="form-error">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <div class="form-content">
+                    <label class="text-form">
+                        Senha
+                    </label>
+                    {{ form.password }}
+                </div>
+
+                {% if form.password.errors %}
+                    <div class="form-error">
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="forgot-password">
+                <a href="{% url 'forgot' %}" class="forgot-password-link">
+                    Esqueci minha senha
+                </a>
+            </div>
+
+            <div class="btn-form">
+                <button type="submit" class="btn-input-style">
+                    Entrar
+                </button>
+            </div>
+        </div>
+
+    </form>
+    
+    <div class="signup">
+        <span class="signup-text">
+            Não tem uma conta?
+        </span>
+        <a href="{% url 'cadastro' %}" class="signup-link">
+            Cadastre-se
+        </a>
+    </div>
+    
+</section>
+
+{% endblock %}
