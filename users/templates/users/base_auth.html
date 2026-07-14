@@ -35,8 +35,8 @@
         :root {
             --color-white: #FFF;
             --color-primary-rgb: rgb(136, 93, 200);
-            --color-secondary-rgb: rgb(255, 255, 255, .4);
-            --color-description-rgb: rgb(255,255,255,.6);
+            --color-secondary-rgb: rgba(255, 255, 255, .4);
+            --color-description-rgb: rgba(255,255,255,.6);
         }
 
         body {
@@ -241,8 +241,9 @@
         }
 
         .btn-input-style:hover {
+            background-color: rgb(123, 81, 184);
             transform: scale(1.02);
-            transition: 0.2s ease;
+            transition: all .2s ease;
         }
         
         .btn-input-style:hover::before {

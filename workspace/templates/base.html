@@ -3,28 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Pessoal</title>
+    <title>Gestão CRM</title>
     
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/f8c32f1a2a.js" crossorigin="anonymous" defer></script>
+
+    <style>
+
+        :root {
+            /* Primárias */
+            --color-primary: rgb(136, 93, 200);
+            --color-primary-rgba: rgba(136, 93, 200, .5);
+            --color-primary-hover: rgb(123, 81, 184);
+            --color-primary-soft: rgba(136, 93, 200, .3);
+
+            /* Backgrounds */
+            --color-bg: #0f172a;
+            --color-bg-secondary: #1e293b;
+            --color-surface: rgba(255,255,255,.09);
+
+            /* Texto */
+            --color-text-white: #fff;
+            --color-text-muted: rgba(255,255,255,.55);
+            --color-text-secondary: rgba(255,255,255,.4);
+            --color-text-accent: rgba(185, 147, 242, 1);
+
+            /* Bordas */
+            --color-border: rgba(232,232,232,.2);
+            --color-border-light: rgba(255,255,255,.35);
+
+            /* Border-radius */
+            --radius-sm: 6px;
+
+            /* Bootstrap */
+            --bs-primary: var(--color-primary);
+            --bs-body-bg: var(--color-bg);
+            --bs-body-color: var(--color-text-white);
+            --bs-border-color: var(--color-border);
+            --bs-border-radius: var(--radius-sm);
+        }
+
+        .btn-primary {
+            --bs-btn-color: var(--color-text-white);
+            
+            --bs-btn-bg: var(--color-primary);
+            --bs-btn-border-color: var(--color-border);
+            
+            --bs-btn-hover-bg: var(--color-primary-hover);
+            --bs-btn-hover-border-color: var(--color-border);
+
+            --bs-btn-active-color: var(--color-text-white);
+            --bs-btn-active-bg: var(--color-primary-hover);
+            --bs-btn-active-border-color: var(--color-primary-hover);
+
+            transition: all .2s ease;
+        }
+
+        .btn-primary:hover{
+            transform: scale(1.02);
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                var(--color-bg),
+                var(--color-bg-secondary)
+            );
+        }
+
+        .sidebar {
+            background-color: var(--color-surface);
+        }
+
+        .sidebar-nav {
+            gap: 4px;
+        }
+
+        .nav-link {
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: background-color .2s ease, color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:active {
+            background-color: var(--color-primary-soft);
+            color: rgba(185, 147, 242, 12);
+        }
+
+        .nav-link:focus {
+            color: var(--color-text-secondary);
+        }
+
+        .nav-link.active {
+            background-color: var(--color-primary-rgba);
+            color: rgba(185, 147, 242, 12);
+        }
+
+        /* btn-primary animation */
+
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .4), transparent);
+            transform: skewX(-20deg);
+            transition: transform 0.2s ease;
+        }
+        
+        .btn-shine:hover::before {
+            animation: shine 0.8s ease forwards;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -75%;
+            }
+            100% {
+                left: 125%;
+            }
+        }
+
+    </style>
+
 </head>
 <body>
-    <header>
-        <div class="sidebar-container">
+    <div class="container-fluid">
+        <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-2 sidebar p-0"> 
-                <h5 class="text-white text-center py-4">Gestão CRM</h5>
-                <a href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a> 
-                <a href="{% url 'tarefas' %}"><i class="fa-solid fa-folder me-2"></i> Tarefas</a>
-                <a href="{% url 'contatos' %}"><i class="fa-solid fa-folder me-2"></i> Contatos</a>
-                <a href="{% url 'conversas' %}"><i class="fa-solid fa-folder me-2"></i> Conversas</a>
-                <a href="{% url 'agenda' %}"><i class="fa-solid fa-folder me-2"></i> Agenda</a>
-                <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
-            </nav>
+            <aside class="col-md-3 col-lg-2 min-vh-100 p-3 d-flex flex-column sidebar">
+
+                <h5 class="text-white mb-4">
+                    Gestão CRM
+                </h5>
+
+                <nav class="nav flex-column sidebar-nav">
+                    <a href="{% url 'dashboard' %}" class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                        <i class="fa-solid fa-chart-column"></i> Dashboard
+                    </a> 
+
+                    <a href="{% url 'tarefas' %}" class="nav-link {% if request.resolver_match.url_name == 'tarefas' %}active{% endif %}">
+                        <i class="fa-solid fa-list-check"></i> Tarefas
+                    </a>
+
+                    <a href="{% url 'agenda' %}" class="nav-link {% if request.resolver_match.url_name == 'agenda' %}active{% endif %}">
+                        <i class="fa-regular fa-calendar"></i> Agenda
+                    </a>
+
+                    <a href="{% url 'contatos' %}" class="nav-link {% if request.resolver_match.url_name == 'contatos' %}active{% endif %}">
+                        <i class="fa-regular fa-user"></i> Contatos
+                    </a>
+
+                    <a href="{% url 'conversas' %}" class="nav-link {% if request.resolver_match.url_name == 'conversas' %}active{% endif %}">
+                        <i class="fa-regular fa-comment"></i> Conversas
+                    </a>
+                </nav>
+
+                <div class="mt-auto pt-3 border-top pt-4">
+
+                    <div class="text-white mb-3">
+                        <div>
+                            <i class="fa-regular fa-circle-user fa-lg"></i>
+                            {{ request.user.username }}
+                        </div>
+
+                        <small class="text-secondary">
+                            {{ request.user.email }}
+                        </small>
+                    </div>
+
+                    <a href="{% url 'logout' %}" class="btn btn-primary btn-shine w-100">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+                        Sair
+                    </a>
+
+                </div>
+
+            </aside>
+
+            <main class="col-md-9 col-lg-10 wrapper-body" role="main">
+                {% block content %}{% endblock %}
+            </main>
+
         </div>
-    </header>
-    
-    <main role="main">
-        {% block content %}{% endblock %}
-    </main>
+    </div>
 
     <!-- Boostrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
