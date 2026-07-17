@@ -15,6 +15,10 @@ def contatos(request):
     return render(request, 'workspace/contatos.html')
 
 @login_required
+def conversas(request):
+    return render(request, 'workspace/conversas.html')
+
+@login_required
 def agenda(request):
     return render(request, 'workspace/agenda.html')
 
