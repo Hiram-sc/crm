@@ -13,7 +13,7 @@ class Contact(models.Model):
     email = models.EmailField(max_length=150, blank=False, null=False, unique=True)
     phone = models.CharField(max_length=20, blank=False, null=False)
     occupation = models.CharField(max_length=60, blank=False, null=False)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='novo')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Novo')
     is_active = models.BooleanField(default=True)
     created_at = models.DateField(auto_now_add=True)
     last_interaction_at = models.DateTimeField(blank=True, null=True)

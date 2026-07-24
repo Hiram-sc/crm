@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    .contacts-actions {
+        align-items: center;
+    }
+
+    .search-form {
+        width: 280px;
+    }
+
+    .contact-card {
+        background-color: var(--color-surface);
+        padding: 10px;
+        border: 1px solid var(--color-border-light);
+        border-radius: 10px;
+        max-width: 330px;
+        width: 100%;
+        transition: .2s ease;
+    }
+    
+    .contact-card:hover {
+        border-color: var(--color-primary-soft);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .contact-card-content {
+        border-bottom: 1px solid var(--color-border-light);
+        width: 100%;
+    }
+
+    .contact-filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px;
+        background-color: var(--color-bg-secondary);
+        border: 1px solid var(--color-border-light);
+        border-radius: var(--radius-sm);
+    }
+
+    .filter-item {
+        background: var(--color-surface);
+        color: var(--color-text-secondary);
+        border: 1px solid var(--color-border);
+        padding: 6px 16px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: .2s ease;
+    }
+
+    .filter-item:hover,
+    .filter-item.active {
+        background: var(--color-primary-rgba);
+        color: var(--color-text-write);
+        border-color: var(--color-primary);
+    }
+
+    /* Form */
+
+    .modal-header,
+    .modal-footer {
+        border: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid var(--color-border-light);
+        padding: 20px;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+    }
+
+    .modal-content {
+        padding: 10px;
+        border-radius: 30px;           
+    }
+
+    .form-input {
+        color: var(--color-white);
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0 12px;
+        min-height: 42px;
+        max-height: 42px;
+        width: 100%;
+        outline: none;
+        background: transparent;
+        border: 3px solid rgb(130, 146, 174);
+        border-radius: 10px;
+        transition: 0.1s ease;
+    }
+
+    .form-input:hover {
+        border-color: rgb(184, 208, 249);
+    }
+
+    .form-error {
+        color: rgba(237, 57, 57, 0.9);
+        font-size: 15px; 
+    }
+
+    .form-error ul {
+        list-style: none;
+    }
+
+    /* status contact */
+
+    .contact-status {
+        display: inline-flex;
+        font-size: 14px;    
+        padding: 5px;
+        border: 1px solid;
+        border-radius: 999px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .status-new {
+        color: var(--color-text-new);
+        background-color: var(--color-bg-new);
+        border-color: var(--color-border-new);
+    }
+
+    /* mark-timer */
+
+    .mark {
+        width: 6px;
+        height: 6px;
+        background-color: #fff;
+        border-radius: 999px;
+    }
+    
+</style>
+
+<section class="p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Contatos</h1>
+
+        <div class="contacts-actions d-flex gap-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">
+                <i class="fa-solid fa-plus me-2"></i>
+                Adicionar contato
+            </button>
+
+            <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="post" class="form-modal" novalidate>
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    Novo contato
+                                </h5>
+
+                                <button 
+                                    type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal">
+                                </button>
+                            </div>
+
+                            {% csrf_token %}
+
+                            <div class="modal-body">
+                                <div class="d-flex flex-column gap-2 mb-4">
+                                    <label class="text-secondary">
+                                        Nome
+                                    </label>
+                                    {{ form.name }}
+
+                                    {% if form.name.errors %}
+                                        <div class="form-error">
+                                            {{ form.name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                               
+                                <div class="d-flex flex-column gap-2 mb-4">
+                                    <label class="text-secondary">
+                                        E-mail
+                                    </label>
+                                    {{ form.email }}
+
+                                    {% if form.email.errors %}
+                                        <div class="form-error">
+                                            {{ form.email.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                               <div class="d-flex gap-2">
+                                    <div class="d-flex flex-column gap-2">
+                                        <label class="text-secondary">
+                                            Telefone
+                                        </label> 
+                                        {{ form.phone }}
+                                        
+                                        {% if form.phone.errors %}
+                                        <div class="form-error">
+                                            {{ form.phone.errors }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="d-flex flex-column gap-2">
+
+                                        <label class="text-secondary">
+                                            Ocupação
+                                        </label>
+                                        {{ form.occupation }} 
+                                        
+                                        {% if form.occupation.errors %}
+                                        <div class="form-error">
+                                            {{ form.occupation.errors }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer p-2">
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-primary w-100">
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            
+            <form class="search-form">
+                <input type="search" class="form-control" placeholder="Pesquisar contatos...">
+            </form>
+        </div>
+
+    </div>
+
+    <div class="contact-filters mb-3">
+        <button class="filter-item">
+            <i class="fa-solid fa-list"></i>
+            Todos
+        </button>
+        
+        <button class="filter-item">
+            <i class="fa-solid fa-star"></i>
+            Novos
+        </button>
+        
+        <button class="filter-item">
+            <i class="fa-solid fa-envelope"></i>
+            Lidos
+        </button>
+        
+        <button class="filter-item">
+            <i class="fa-solid fa-clock"></i>
+            Pendentes
+        </button>
+        
+        <button class="filter-item">
+            <i class="fa-solid fa-arrow-right"></i>
+            Respondidos
+        </button>
+        
+        <button class="filter-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Fechados
+        </button>
+    </div>
+
+    <div class="contacts d-flex align-items-center gap-3">
+        {% for contact in contacts %}
+            <div class="contact-card d-flex flex-column align-items-start gap-2">
+                <div class="contact-card-content pb-2">
+                    <div class="contact-header">
+                        <h3 class="contact-name">{{ contact.name }}</h3>
+                        <span class="text-secondary">{{ contact.occupation }}</span>
+                    </div>
+
+                    <div class="contact-body">
+                        <p class="contact-info">{{ contact.phone }}</p>
+                        <p class="contact-info">{{ contact.email }}</p>
+                    </div>
+                    
+                    <span class="contact-status">{{ contact.status }}</span>
+                </div>
+                
+                <div class="d-flex gap-2 align-items-center">
+                    {% if contact.last_interaction_at %}
+                        <span class="mark"></span>
+                        <small class="contact-time">Último contato: {{ contact.last_interaction_at|timesince }} atrás</small>
+                    {% else %}
+                        <small class="text-secondary">Nenhum contato realizado</small>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
