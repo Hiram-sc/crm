@@ -26,9 +26,9 @@
             --color-surface: rgba(255,255,255,.04);
 
             /* Texto */
+            --color-text-secondary: rgba(255,255,255,.4);
             --color-text-white: #fff;
             --color-text-muted: rgba(255,255,255,.55);
-            --color-text-secondary: rgba(255,255,255,.4);
             --color-text-accent: rgba(185, 147, 242, 1);
 
             /* Bordas */
@@ -40,31 +40,32 @@
 
             /* Bootstrap */
             --bs-primary: var(--color-primary);
+            --bs-secondary-color: var(var(--color-text-secondary));
             --bs-body-bg: var(--color-bg);
             --bs-body-color: var(--color-text-white);
             --bs-border-color: var(--color-border);
             --bs-border-radius: var(--radius-sm);
 
             /* Contacts Status*/
-            --color-text-new: rgba(23, 106, 240);
-            --color-bg-new: rgb(96, 165, 250, .3);
-            --color-border-new: rgb(59, 130, 246, .4);
+            --color-text-new: rgb(23, 106, 240);
+            --color-bg-new: rgba(96, 165, 250, .2);
+            --color-border-new: rgba(59, 130, 246, .4);
 
-            --color-text-read: rgba(16, 185, 129, .18);
-            --color-bg-red: rgb(74, 222, 128);
-            --color-border-red: rgb(22, 163, 74);
+            --color-text-read: rgb(16, 185, 129);
+            --color-bg-read: rgba(74, 222, 128, .2);
+            --color-border-read: rgba(22, 163, 74, .4);
 
-            --color-text-pending: rgba(245, 158, 11, .18);
-            --color-bg-pending: rgb(252, 211, 77);
-            --color-border-pending: rgb(202, 138, 4);
+            --color-text-pending: rgb(245, 158, 11);
+            --color-bg-pending: rgba(252, 211, 77, .2);
+            --color-border-pending: rgba(202, 138, 4, .4);
             
-            --color-text-replied: rgba(168, 85, 247, .18);
-            --color-bg-replied: rgb(196, 181, 253);
-            --color-border-replied: rgb(147, 51, 234);
+            --color-text-replied: rgb(168, 85, 247);
+            --color-bg-replied: rgba(173, 96, 250, .1);
+            --color-border-replied: rgba(147, 51, 234, .4);
 
-            --color-text-closed: rgba(239, 68, 68, .18);
-            --color-bg-closed: rgb(248, 113, 113);
-            --color-border-closed: rgb(220, 38, 38);
+            --color-text-closed: rgb(239, 68, 68);
+            --color-bg-closed: rgba(248, 113, 113, .2);
+            --color-border-closed: rgba(220, 38, 38, .4);
         }
 
         .btn-primary {
@@ -103,7 +104,7 @@
             color: var(--color-text-secondary);
             border-radius: var(--radius-sm);
             text-decoration: none;
-            transition: background-color .2s ease, color .2s ease;
+            transition: background-color .4s ease, color .2s ease;
         }
 
         .nav-link:hover,

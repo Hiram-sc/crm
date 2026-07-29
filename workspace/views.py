@@ -25,11 +25,22 @@ def contatos(request):
         form = ContactForm()
 
     contact = Contact.objects.all()
+    total_contacts = Contact.objects.count()
+    replied_contacts = Contact.objects.filter(status='respondido').count()
+    new_contacts = Contact.objects.filter(status='novo').count()
+    pending_contacts = Contact.objects.filter(status='pendente').count()
 
-    return render(request, 'workspace/contatos.html', {
+        
+    context = {
         'form': form,
-        'contacts': contact
-    })
+        'contacts': contact,
+        'total_contacts' : total_contacts,
+        'replied_contacts' : replied_contacts,
+        'new_contacts' : new_contacts, 
+        'pending_contacts' : pending_contacts,
+    }
+
+    return render(request, 'workspace/contatos.html', context)
 
 @login_required
 def conversas(request):
